@@ -7,10 +7,10 @@ class Player:
         self.__shooting = shooting
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"Player: {self.__name}\n"
             f"Sprint: {self.__sprint}\n"

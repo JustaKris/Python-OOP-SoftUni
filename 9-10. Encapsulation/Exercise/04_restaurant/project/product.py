@@ -4,9 +4,9 @@ class Product:
         self.__price = price
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @property
-    def price(self):
+    def price(self) -> float:
         return self.__price

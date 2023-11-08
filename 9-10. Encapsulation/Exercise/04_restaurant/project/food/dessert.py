@@ -7,5 +7,5 @@ class Dessert(Food):
         self.__calories = calories
 
     @property
-    def calories(self):
+    def calories(self) -> float:
         return self.__calories

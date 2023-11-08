@@ -8,7 +8,7 @@ class Team:
         self.__rating = rating
         self.__players: List[Player] = []
 
-    def add_player(self, player: Player):
+    def add_player(self, player: Player) -> str:
         if player in self.__players:
             return f"Player {player.name} has already joined"
         self.__players.append(player)

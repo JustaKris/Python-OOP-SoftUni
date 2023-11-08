@@ -7,5 +7,5 @@ class Food(Product):
         self.__grams = grams
 
     @property
-    def grams(self):
+    def grams(self) -> float:
         return self.__grams

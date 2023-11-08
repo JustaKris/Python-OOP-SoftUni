@@ -7,5 +7,5 @@ class Beverage(Product):
         self.__milliliters = milliliters
 
     @property
-    def milliliters(self):
+    def milliliters(self) -> float:
         return self.__milliliters

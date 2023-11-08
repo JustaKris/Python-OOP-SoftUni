@@ -10,10 +10,9 @@ class Dough:
 
     @flour_type.setter
     def flour_type(self, value: str):
-        if not value:
+        if value == '':
             raise ValueError("The flour type cannot be an empty string")
-        else:
-            self.__flour_type = value
+        self.__flour_type = value
 
     @property
     def baking_technique(self):
@@ -23,8 +22,7 @@ class Dough:
     def baking_technique(self, value: str):
         if value == '':
             raise ValueError("The baking technique cannot be an empty string")
-        else:
-            self.__baking_technique = value
+        self.__baking_technique = value
 
     @property
     def weight(self):
@@ -32,7 +30,6 @@ class Dough:
 
     @weight.setter
     def weight(self, value: float):
-        if value > 0:
-            self.__weight = value
-        else:
+        if value <= 0:
             raise ValueError("The weight cannot be less or equal to zero")
+        self.__weight = value

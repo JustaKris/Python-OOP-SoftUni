@@ -10,5 +10,5 @@ class Coffee(HotBeverage):
         self.__caffeine = caffeine
 
     @property
-    def caffeine(self):
+    def caffeine(self) -> float:
         return self.__caffeine
