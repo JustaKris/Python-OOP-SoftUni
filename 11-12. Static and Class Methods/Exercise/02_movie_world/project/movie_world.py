@@ -5,25 +5,28 @@ from project.dvd import DVD
 
 
 class MovieWorld:
+    _dvd_capacity = 15
+    _customer_capacity = 10
+
     def __init__(self, name: str):
         self.name = name
         self.customers: list[Customer] = []
         self.dvds: list[DVD] = []
 
-    @property
-    def dvd_capacity(self):
-        return 15
+    @classmethod
+    def dvd_capacity(cls):
+        return cls._dvd_capacity
 
-    @property
-    def customer_capacity(self):
-        return 10
+    @classmethod
+    def customer_capacity(cls) -> int:
+        return cls._customer_capacity
 
     def add_customer(self, customer: Customer) -> None:
-        if len(self.customers) < self.customer_capacity:
+        if len(self.customers) < self.customer_capacity():
             self.customers.append(customer)
 
     def add_dvd(self, dvd: DVD) -> None:
-        if len(self.dvds) < self.dvd_capacity:
+        if len(self.dvds) < self.dvd_capacity():
             self.dvds.append(dvd)
 
     def rent_dvd(self, customer_id: int, dvd_id: int) -> str:
