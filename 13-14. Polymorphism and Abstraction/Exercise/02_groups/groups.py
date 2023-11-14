@@ -1,3 +1,5 @@
+# from __future__ import annotations
+
 from typing import List
 
 
@@ -6,7 +8,7 @@ class Person:
         self.name = name
         self.surname = surname
 
-    def __add__(self, other):
+    def __add__(self, other: 'Person'):
         return Person(self.name, other.surname)
 
     def __repr__(self):
@@ -18,19 +20,17 @@ class Group:
         self.name = name
         self.people = people
 
-    def __add__(self, other):
-        new_group_name = f"{self.name} {other.name}"
-        new_group_members = self.people + other.people
-        return Group(new_group_name, new_group_members)
+    def __add__(self, other: 'Group'):
+        return Group(f"{self.name} {other.name}", self.people + other.people)
 
     def __len__(self):
         return len(self.people)
 
-    def __iter__(self):
-        result = [f"Person {index}: {repr(person)}" for index, person in enumerate(self.people)]
-        return iter(result)
+    # def __iter__(self):
+    #     result = [f"Person {index}: {repr(person)}" for index, person in enumerate(self.people)]
+    #     return iter(result)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int):
         return f"Person {index}: {repr(self.people[index])}"
 
     def __repr__(self):
