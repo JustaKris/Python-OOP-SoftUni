@@ -15,7 +15,7 @@ class Animal(ABC):
 
     @staticmethod
     @abstractmethod
-    def make_sound():
+    def make_sound() -> str:
         pass
 
     def feed(self, food: Food):

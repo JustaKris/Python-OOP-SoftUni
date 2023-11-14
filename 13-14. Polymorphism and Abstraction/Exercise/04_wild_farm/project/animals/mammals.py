@@ -5,7 +5,8 @@ class Mouse(Mammal):
     FOOD_PREFERENCE = ["Fruit", "Vegetable"]
     WEIGHT_GAIN_RATION = 0.10
 
-    def make_sound(self):
+    @staticmethod
+    def make_sound() -> str:
         return "Squeak"
 
 
@@ -14,7 +15,7 @@ class Dog(Mammal):
     WEIGHT_GAIN_RATION = 0.40
 
     @staticmethod
-    def make_sound():
+    def make_sound() -> str:
         return "Woof!"
 
 
@@ -23,7 +24,7 @@ class Cat(Mammal):
     WEIGHT_GAIN_RATION = 0.30
 
     @staticmethod
-    def make_sound():
+    def make_sound() -> str:
         return "Meow"
 
 
@@ -32,5 +33,5 @@ class Tiger(Mammal):
     WEIGHT_GAIN_RATION = 1.00
 
     @staticmethod
-    def make_sound():
+    def make_sound() -> str:
         return "ROAR!!!"

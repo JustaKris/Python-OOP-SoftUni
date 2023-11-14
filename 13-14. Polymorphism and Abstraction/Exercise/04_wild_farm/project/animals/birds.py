@@ -6,7 +6,7 @@ class Owl(Bird):
     WEIGHT_GAIN_RATION = 0.25
 
     @staticmethod
-    def make_sound():
+    def make_sound() -> str:
         return "Hoot Hoot"
 
 
@@ -15,5 +15,5 @@ class Hen(Bird):
     WEIGHT_GAIN_RATION = 0.35
 
     @staticmethod
-    def make_sound():
+    def make_sound() -> str:
         return "Cluck"
