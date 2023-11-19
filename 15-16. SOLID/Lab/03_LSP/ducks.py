@@ -1,17 +1,10 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 
 class Duck(ABC):
     @staticmethod
+    @abstractmethod
     def quack():
-        pass
-
-    @staticmethod
-    def walk():
-        pass
-
-    @staticmethod
-    def fly():
         pass
 
 
@@ -19,16 +12,6 @@ class RubberDuck(Duck):
     @staticmethod
     def quack():
         return "Squeek"
-
-    @staticmethod
-    def walk():
-        """Rubber duck can walk only if you move it"""
-        raise Exception('I cannot walk by myself')
-
-    @staticmethod
-    def fly():
-        """Rubber duck can fly only if you throw it"""
-        raise Exception('I cannot fly by myself')
 
 
 class RobotDuck(Duck):

@@ -1,22 +1,36 @@
-class Animal:
-    def __init__(self, species):
-        self.species = species
-
-    def get_species(self):
-        return self.species
+from abc import ABC, abstractmethod
 
 
-def animal_sound(animals: list):
-    for animal in animals:
-        if animal.species == 'cat':
-            print('meow')
-        elif animal.species == 'dog':
-            print('woof-woof')
+class Animal(ABC):
+    @staticmethod
+    @abstractmethod
+    def make_sound() -> str:
+        pass
+
+    @property
+    def species(self) -> str:
+        return self.__class__.__name__
 
 
-animals = [Animal('cat'), Animal('dog')]
-animal_sound(animals)
+class Cat(Animal):
+    @staticmethod
+    def make_sound() -> str:
+        return "meow"
 
-## добавете ново животно и рефакторирайте кода да работи без да се налага да се правят промени по него
-## при добавяне на нови животни
-# animals = [Animal('cat'), Animal('dog'), Animal('chicken')]
+
+class Chicken(Animal):
+    @staticmethod
+    def make_sound() -> str:
+        return "chirp-chirp"
+
+
+class Dog(Animal):
+    @staticmethod
+    def make_sound() -> str:
+        return "woof-woof"
+
+
+class Turtle(Animal):
+    @staticmethod
+    def make_sound() -> str:
+        return "turtle hissing"
