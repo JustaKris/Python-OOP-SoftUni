@@ -1,18 +1,17 @@
 class dictionary_iter:
     def __init__(self, dictionary: dict):
-        self.dictionary = dictionary
+        self.dict_tuple = tuple(dictionary.items())  # returns list of tuples for each key-value pair in dictionary
         self.index = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.index >= len(self.dictionary):
+        if self.index >= len(self.dict_tuple):
             raise StopIteration
-        else:
-            result = [(key, value) for key, value in self.dictionary.items()][self.index]
-            self.index += 1
-            return result
+        index = self.index
+        self.index += 1
+        return self.dict_tuple[index]
 
 
 # Test 1

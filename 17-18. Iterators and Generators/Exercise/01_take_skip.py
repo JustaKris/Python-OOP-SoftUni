@@ -10,11 +10,10 @@ class take_skip:
     def __next__(self):
         if self.count <= 0:
             raise StopIteration
-        else:
-            result = self.current
-            self.current += self.step
-            self.count -= 1
-            return result
+        result = self.current
+        self.current += self.step
+        self.count -= 1
+        return result
 
 
 numbers = take_skip(10, 5)

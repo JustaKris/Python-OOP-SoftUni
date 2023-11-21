@@ -1,8 +1,6 @@
 def read_next(*args):
-    iterators = [iter(arg) for arg in args]
-    for iterator in iterators:
-        for element in iterator:
-            yield element
+    for collection in args:
+        yield from collection
 
 
 # Test case 1
