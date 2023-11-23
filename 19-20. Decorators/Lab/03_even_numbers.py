@@ -1,7 +1,7 @@
 def even_numbers(function):
-    def wrapper(numbers):
-        pass
-
+    def wrapper(*args, **kwargs):
+        result = function(*args, **kwargs)
+        return [number for number in result if number % 2 == 0]
     return wrapper
 
 
