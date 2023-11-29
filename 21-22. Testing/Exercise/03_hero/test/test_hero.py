@@ -9,15 +9,21 @@ class HeroTest(TestCase):
     health = 29.5
     damage = 2.5
 
+    # Enemy hero inputs
+    enemy_username = "Toshonator"
+    enemy_level = 5
+    enemy_health = 22.5
+    enemy_damage = 1.8
+
     def setUp(self):
         self.hero = Hero(self.username, self.level, self.health, self.damage)
-        self.enemy_hero = Hero("Toshonator", 5, 22.5, 1.8)
+        self.enemy_hero = Hero(self.enemy_username, self.enemy_level, self.enemy_health, self.enemy_damage)
 
     def test_init(self):
-        self.assertEquals(self.username, self.hero.username)
-        self.assertEquals(self.level, self.hero.level)
-        self.assertEquals(self.health, self.hero.health)
-        self.assertEquals(self.damage, self.hero.damage)
+        self.assertEqual(self.username, self.hero.username)
+        self.assertEqual(self.level, self.hero.level)
+        self.assertEqual(self.health, self.hero.health)
+        self.assertEqual(self.damage, self.hero.damage)
 
     def test__attribute_types(self):
         self.assertIsInstance(self.username, str)
@@ -26,36 +32,36 @@ class HeroTest(TestCase):
         self.assertIsInstance(self.damage, float)
 
     def test_battle_loss(self):
-        self.hero.health = 10
-        self.hero.damage = 10
-        enemy_hero = Hero("Toshonator", 100, 100, 100)
+        self.enemy_hero.level, self.enemy_hero.health, self.enemy_hero.damage = [100, 100, 100]
 
-        result = self.hero.battle(enemy_hero)
+        result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("You lose", result)
-        self.assertEqual(-9990, self.hero.health)
-        self.assertEquals(35, enemy_hero.health)
-        self.assertEquals(101, enemy_hero.level)
-        self.assertEquals(105, enemy_hero.damage)
+        self.assertEqual(-9970.5, self.hero.health)
+        self.assertEqual(87.5, self.enemy_hero.health)
+        self.assertEqual(101, self.enemy_hero.level)
+        self.assertEqual(105, self.enemy_hero.damage)
 
     def test_battle_win(self):
         self.hero.damage = 25
         result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("You win", result)
-        self.assertEquals(self.level + 1, self.hero.level)
-        self.assertEquals(25.5, self.hero.health)
-        self.assertEquals(30, self.hero.damage)
+        self.assertEqual(self.level + 1, self.hero.level)
+        self.assertEqual(25.5, self.hero.health)
+        self.assertEqual(30, self.hero.damage)
 
-        self.assertEquals(5, self.enemy_hero.level)
-        self.assertEquals(-152.5, self.enemy_hero.health)
-        self.assertEquals(1.8, self.enemy_hero.damage)
+        self.assertEqual(5, self.enemy_hero.level)
+        self.assertEqual(-152.5, self.enemy_hero.health)
+        self.assertEqual(1.8, self.enemy_hero.damage)
 
     def test_battle_draw(self):
         self.hero.damage = 25
         self.enemy_hero.damage = 25
+
         expected_hero_health = self.hero.health - (self.enemy_hero.damage * self.enemy_hero.level)
         expected_enemy_hero_health = self.enemy_hero.health - (self.hero.damage * self.hero.level)
+
         result = self.hero.battle(self.enemy_hero)
 
         self.assertEqual("Draw", result)
