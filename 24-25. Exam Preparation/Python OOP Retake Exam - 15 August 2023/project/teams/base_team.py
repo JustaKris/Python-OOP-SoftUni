@@ -10,7 +10,7 @@ class BaseTeam(ABC):
         self.__country = country
         self.__advantage = advantage
         self.budget = budget
-        self.wins:int = 0
+        self.wins: int = 0
         self.equipment: List[BaseEquipment] = []
 
     @property
@@ -19,7 +19,9 @@ class BaseTeam(ABC):
 
     @name.setter
     def name(self, value):
-        pass
+        if value.strip() == '':
+            raise ValueError("Team name cannot be empty!")
+        self.__name = value
 
     @property
     def country(self):
@@ -27,23 +29,27 @@ class BaseTeam(ABC):
 
     @country.setter
     def country(self, value):
-        pass
+        if len(value.strip()) < 2:  # or maybe try regex match
+            raise ValueError("Team country should be at least 2 symbols long!")
+        self.__country = value
 
-    @ @property
+    @property
     def advantage(self):
         return self.__advantage
 
     @advantage.setter
     def advantage(self, value):
-        pass
+        if value <= 0:
+            raise ValueError("Advantage must be greater than zero!")
+        self.__advantage = value
 
     @abstractmethod
     def win(self):
         pass
 
     def get_statistics(self):
-        total_price_of_team_equipment = 0  # Todo: this
-        avg_team_protection = 0  # Todo: this
+        total_price_of_team_equipment = sum(equipment.price for equipment in self.equipment)
+        avg_team_protection = sum(equipment.protection for equipment in self.equipment) / len(self.equipment)
 
         return (f"Name: {self.name}\n"
                 f"Country: {self.country}\n"
