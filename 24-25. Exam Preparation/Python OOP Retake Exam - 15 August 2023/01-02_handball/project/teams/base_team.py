@@ -6,9 +6,9 @@ from project.equipment.base_equipment import BaseEquipment
 class BaseTeam(ABC):
 
     def __init__(self, name: str, country: str, advantage: int, budget: float):
-        self.__name = name
-        self.__country = country
-        self.__advantage = advantage
+        self.name = name
+        self.country = country
+        self.advantage = advantage
         self.budget = budget
         self.wins: int = 0
         self.equipment: List[BaseEquipment] = []
@@ -29,7 +29,7 @@ class BaseTeam(ABC):
 
     @country.setter
     def country(self, value):
-        if len(value.strip()) < 2:  # or maybe try regex match
+        if len(value.strip()) < 2:
             raise ValueError("Team country should be at least 2 symbols long!")
         self.__country = value
 
@@ -49,12 +49,12 @@ class BaseTeam(ABC):
 
     def get_statistics(self):
         total_price_of_team_equipment = sum(equipment.price for equipment in self.equipment)
-        avg_team_protection = sum(equipment.protection for equipment in self.equipment) / len(self.equipment)
+        avg_team_protection = sum(equipment.protection for equipment in self.equipment) / len(self.equipment) if self.equipment else 0
 
         return (f"Name: {self.name}\n"
                 f"Country: {self.country}\n"
                 f"Advantage: {self.advantage} points\n"
-                f"Budget: {self.budget}EUR\n"
+                f"Budget: {self.budget:.2f}EUR\n"
                 f"Wins: {self.wins}\n"
-                f"Total Equipment Price: {total_price_of_team_equipment}\n"
-                f"Average Protection: {avg_team_protection}")
+                f"Total Equipment Price: {total_price_of_team_equipment:.2f}\n"
+                f"Average Protection: {avg_team_protection:.0f}")
