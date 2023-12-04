@@ -47,6 +47,7 @@ class BaseClient(ABC):
     def increase_clients_interest(self):
         pass
 
+    # Helper methods
     @abstractmethod
     def get_valid_loan_types(self):
         pass

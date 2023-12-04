@@ -34,7 +34,7 @@ class BankApp:
     def grant_loan(self, loan_type: str, client_id: str):
         loan = next((l for l in self.loans if type(l).__name__ == loan_type), None)
         client = next((c for c in self.clients if c.client_id == client_id), None)
-        if type(loan).__name__ not in client.get_valid_loan_types():
+        if loan.__class__.__name__ not in client.get_valid_loan_types():
             raise ValueError("Inappropriate loan type!")
         self.loans.remove(loan)
         client.loans.append(loan)
@@ -42,7 +42,7 @@ class BankApp:
 
     def remove_client(self, client_id: str):
         client = next((c for c in self.clients if c.client_id == client_id), None)
-        if not client:
+        if client is None:
             raise Exception("No such client!")
         if client.loans:
             raise Exception("The client has loans! Removal is impossible!")
@@ -50,7 +50,7 @@ class BankApp:
         return f"Successfully removed {client.name} with ID {client.client_id}."
 
     def increase_loan_interest(self, loan_type: str):
-        changed_loans = [l.increase_interest_rate() for l in self.loans if type(l).__name__ == loan_type]
+        changed_loans = [l.increase_interest_rate() for l in self.loans if l.__class__.__name__ == loan_type]
         return f"Successfully changed {len(changed_loans)} loans."
 
     def increase_clients_interest(self, min_rate: float):

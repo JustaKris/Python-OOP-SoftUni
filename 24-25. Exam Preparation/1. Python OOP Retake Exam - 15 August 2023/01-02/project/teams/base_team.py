@@ -1,15 +1,15 @@
+import math
 from abc import ABC, abstractmethod
 from typing import List
 from project.equipment.base_equipment import BaseEquipment
 
 
 class BaseTeam(ABC):
-
-    def __init__(self, name: str, country: str, advantage: int, budget: float):
-        self.name = name
-        self.country = country
-        self.advantage = advantage
-        self.budget = budget
+    def __init__(self, name, country, advantage, budget):
+        self.name: str = name
+        self.country: str = country
+        self.advantage: int = advantage
+        self.budget: float = budget
         self.wins: int = 0
         self.equipment: List[BaseEquipment] = []
 
@@ -49,7 +49,7 @@ class BaseTeam(ABC):
 
     def get_statistics(self):
         total_price_of_team_equipment = sum(equipment.price for equipment in self.equipment)
-        avg_team_protection = sum(equipment.protection for equipment in self.equipment) / len(self.equipment) if self.equipment else 0
+        avg_team_protection = math.floor(sum(e.protection for e in self.equipment) / len(self.equipment)) if self.equipment else 0
 
         return (f"Name: {self.name}\n"
                 f"Country: {self.country}\n"

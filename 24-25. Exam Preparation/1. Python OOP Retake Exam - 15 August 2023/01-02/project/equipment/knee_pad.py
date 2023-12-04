@@ -2,11 +2,11 @@ from project.equipment.base_equipment import BaseEquipment
 
 
 class KneePad(BaseEquipment):
-    _protection = 120
-    _price = 15.0
+    PROTECTION = 120
+    PRICE = 15.0
 
     def __init__(self):
-        super().__init__(self._protection, self._price)
+        super().__init__(self.PROTECTION, self.PRICE)
 
     def increase_price(self):
-        self.price /= 1.2
+        self.price *= 1.2
