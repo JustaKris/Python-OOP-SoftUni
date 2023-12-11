@@ -14,60 +14,49 @@ class BaseDiver(ABC):
         self.has_health_issue: bool = False
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.__name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, value: str) -> None:
         if not value.strip():
             raise ValueError("Diver name cannot be null or empty!")
         self.__name = value
 
     @property
-    def oxygen_level(self):
+    def oxygen_level(self) -> float:
         return self.__oxygen_level
 
     @oxygen_level.setter
-    def oxygen_level(self, value: float):
+    def oxygen_level(self, value: float) -> None:
         if value < 0:
             raise ValueError("Cannot create diver with negative oxygen level!")
         self.__oxygen_level = value
 
     @abstractmethod
-    def miss(self, time_to_catch: int):
+    def miss(self, time_to_catch: int) -> None:
         pass
 
     @abstractmethod
-    def renew_oxy(self):
+    def renew_oxy(self) -> None:
         pass
 
-    def hit(self, fish: BaseFish):
-        # if self.oxygen_level - fish.time_to_catch < 0:
-        #     self.oxygen_level = 0
-        #     self.has_health_issue = True
-        # else:
-        #     self.oxygen_level -= round(fish.time_to_catch * 0.3, 0)
-        #     self.competition_points += fish.points
-        #     self.catch.append(fish)
-        #
-        # if self.oxygen_level == 0:
-        #     self.has_health_issue = True
+    def hit(self, fish: BaseFish) -> None:
         try:
             self.oxygen_level -= fish.time_to_catch
             self.competition_points += round(fish.points, 1)
             self.catch.append(fish)
         except ValueError:
             self.oxygen_level = 0
-        # else:
-        #     self.competition_points += fish.points
-        #     self.catch.append(fish)
 
-        if self.oxygen_level == 0:
-            self.has_health_issue = True
-
-    def update_health_status(self):
+    def update_health_status(self) -> None:
         self.has_health_issue = not self.has_health_issue
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (f"{self.__class__.__name__}: [Name: {self.name}, Oxygen level left: {self.oxygen_level}, "
                 f"Fish caught: {len(self.catch)}, Points earned: {self.competition_points:.1f}]")
+
+    # Helper methods
+    def oxygen_level_health_issue_check(self) -> None:
+        if self.oxygen_level == 0:
+            self.update_health_status()
